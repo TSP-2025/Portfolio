@@ -9,13 +9,11 @@
 
 <style>
 
-/* ================= GLOBAL ================= */
-
-html, body{
+html,body{
 margin:0;
 padding:0;
 background:#ffffff;
-overflow-x:hidden;
+font-family:sans-serif;
 }
 
 :root{
@@ -24,11 +22,7 @@ overflow-x:hidden;
 --lightgrey:#9a9a9a;
 }
 
-body{
-font-family:sans-serif;
-}
-
-/* ================= NAVIGATION ================= */
+/* NAV */
 
 nav{
 position:fixed;
@@ -36,7 +30,6 @@ top:0;
 width:100%;
 background:#ffffff;
 border-bottom:1px solid #eeeeee;
-z-index:1000;
 }
 
 .nav-inner{
@@ -55,9 +48,7 @@ align-items:center;
 gap:12px;
 }
 
-.brand img{
-height:36px;
-}
+.brand img{height:36px;}
 
 .brand-name{
 font-family:'Cormorant Garamond', serif;
@@ -65,74 +56,24 @@ font-size:1.6rem;
 color:var(--brown);
 }
 
-.nav-links{
-display:flex;
-}
-
 .nav-links a{
 margin-left:30px;
 text-decoration:none;
 font-size:0.9rem;
 color:var(--grey);
-transition:color 0.3s ease;
 }
-
-.nav-links a:hover{
-color:var(--brown);
-}
-
-/* Mobile Toggle */
-
-.menu-toggle{
-display:none;
-font-size:1.5rem;
-cursor:pointer;
-}
-
-@media(max-width:768px){
-
-.nav-links{
-position:absolute;
-top:70px;
-right:0;
-background:#ffffff;
-flex-direction:column;
-align-items:flex-start;
-width:200px;
-padding:20px;
-border-left:1px solid #eeeeee;
-border-bottom:1px solid #eeeeee;
-display:none;
-}
-
-.nav-links a{
-margin:10px 0;
-}
-
-.nav-links.active{
-display:flex;
-}
-
-.menu-toggle{
-display:block;
-}
-
-}
-
-/* ================= PAGE CONTENT ================= */
 
 .container{
 width:90%;
-max-width:900px;
-margin:200px auto 120px auto;
-text-align:center;
+max-width:600px;
+margin:180px auto;
 }
 
 h1{
 font-family:'Cormorant Garamond', serif;
-font-size:3rem;
 color:var(--brown);
-margin-bottom:25px;
+font-size:3rem;
+margin-bottom:20px;
 }
 
 .tagline{
@@ -140,74 +81,42 @@ font-family:'Roboto', sans-serif;
 font-weight:100;
 font-style:italic;
 color:var(--grey);
-margin-bottom:70px;
+margin-bottom:50px;
 }
 
-/* ================= WEAVE DOT ANIMATION ================= */
-
-.weave-line{
+form{
 display:flex;
-justify-content:center;
-gap:14px;
-margin-bottom:80px;
+flex-direction:column;
 }
 
-.weave-line span{
-width:6px;
-height:6px;
+input,textarea{
+padding:12px;
+margin-bottom:20px;
+border:1px solid #dddddd;
+font-size:0.95rem;
+}
+
+textarea{resize:none;height:120px;}
+
+button{
 background:var(--brown);
-border-radius:50%;
-animation:wave 3s infinite ease-in-out;
+color:#ffffff;
+padding:12px;
+border:none;
+cursor:pointer;
+transition:opacity 0.3s ease;
 }
 
-/* staggered motion */
+button:hover{opacity:0.85;}
 
-.weave-line span:nth-child(2){animation-delay:0.2s;}
-.weave-line span:nth-child(3){animation-delay:0.4s;}
-.weave-line span:nth-child(4){animation-delay:0.6s;}
-.weave-line span:nth-child(5){animation-delay:0.8s;}
-.weave-line span:nth-child(6){animation-delay:1s;}
-.weave-line span:nth-child(7){animation-delay:1.2s;}
-.weave-line span:nth-child(8){animation-delay:1.4s;}
-.weave-line span:nth-child(9){animation-delay:1.6s;}
-.weave-line span:nth-child(10){animation-delay:1.8s;}
-.weave-line span:nth-child(11){animation-delay:2s;}
-.weave-line span:nth-child(12){animation-delay:2.2s;}
-
-@keyframes wave{
-0%{transform:translateY(0);}
-50%{transform:translateY(-10px);}
-100%{transform:translateY(0);}
+.hidden-field{
+display:none;
 }
 
-/* ================= CONTACT LINKS ================= */
-
-.contact-links{
-margin-top:20px;
-}
-
-.contact-links a{
-display:block;
-text-decoration:none;
-font-size:1.1rem;
-color:var(--grey);
-margin-bottom:25px;
-transition:all 0.3s ease;
-}
-
-.contact-links a:hover{
+.success-message{
 color:var(--brown);
-transform:translateX(8px);
-}
-
-/* ================= FOOTER ================= */
-
-.footer{
-padding:80px 0;
-text-align:center;
-font-size:0.85rem;
-color:var(--lightgrey);
-border-top:1px solid #eeeeee;
+display:none;
+margin-top:20px;
 }
 
 </style>
@@ -217,55 +126,63 @@ border-top:1px solid #eeeeee;
 
 <nav>
 <div class="nav-inner">
-
 <div class="brand">
 <img src="logo.png">
 <div class="brand-name">The Samanweeave Project</div>
 </div>
-
-<div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
-<div class="nav-links" id="navLinks">
+<div class="nav-links">
 <a href="index.html">Home</a>
 <a href="works.html">Works</a>
 <a href="connect.html">Connect</a>
 </div>
-
 </div>
 </nav>
 
 <div class="container">
 
 <h1>Connect With Us</h1>
+<div class="tagline">Let us begin a conversation.</div>
 
-<div class="tagline">
-Let us begin a conversation.
+<form id="contactForm">
+
+<input type="text" name="name" placeholder="Your Name" required>
+<input type="email" name="email" placeholder="Your Email" required>
+<textarea name="message" placeholder="Your Message" required></textarea>
+
+<!-- Honeypot -->
+<input type="text" name="company" class="hidden-field">
+
+<button type="submit">Send Enquiry</button>
+
+<div class="success-message" id="successMessage">
+Thank you. We will respond shortly.
 </div>
 
-<!-- Animated Dot Weave -->
+</form>
 
-<div class="weave-line">
-<span></span><span></span><span></span><span></span><span></span>
-<span></span><span></span><span></span><span></span><span></span>
-<span></span><span></span>
-</div>
-
-<div class="contact-links">
-<a href="mailto:thesamanweeaveproject@gmail.com">Email Us</a>
-<a href="https://www.instagram.com/samanweeave.proj?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Instagram</a>
-<a href="https://www.linkedin.com/company/the-samanweeave-project/" target="_blank">LinkedIn</a>
-</div>
-
-</div>
-
-<div class="footer">
-© 2026 The Samanweeave Project
 </div>
 
 <script>
-function toggleMenu(){
-document.getElementById("navLinks").classList.toggle("active");
+
+const form=document.getElementById("contactForm");
+const success=document.getElementById("successMessage");
+const startTime=Date.now();
+
+form.addEventListener("submit",function(e){
+e.preventDefault();
+
+const honeypot=form.querySelector('input[name="company"]').value;
+const timeTaken=(Date.now()-startTime)/1000;
+
+if(honeypot!=""||timeTaken<3){
+alert("Spam detected.");
+return;
 }
+
+success.style.display="block";
+form.reset();
+});
+
 </script>
 
 </body>
