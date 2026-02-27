@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Samanweeave Project</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+
+html, body{
+margin:0;
+padding:0;
+background:#ffffff;
+font-family:'Inter', sans-serif;
+overflow-x:hidden;
+}
+
+/* COLORS */
+:root{
+--brown:#4b2e1f;
+--grey:#666666;
+--lightgrey:#9a9a9a;
+}
+
+/* INTRO */
+
+.intro{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100vh;
+background:#ffffff;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:2000;
+}
+
+.intro-word{
+font-family:'Cormorant Garamond', serif;
+font-size:3.2rem;
+color:var(--brown);
+opacity:0;
+transition:opacity 0.6s ease;
+}
+
+.intro-logo{
+height:120px; /* Bigger logo */
+opacity:0;
+transition:opacity 0.8s ease, transform 2s ease;
+animation:pulse 2s infinite ease-in-out;
+}
+
+/* subtle loading pulse */
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.03);}
+100%{transform:scale(1);}
+}
+
+.site{
+opacity:0;
+transition:opacity 1s ease;
+}
+
+/* NAV */
+
+nav{
+width:100%;
+border-bottom:1px solid #eeeeee;
+background:#ffffff;
+position:fixed;
+top:0;
+z-index:1000;
+}
+
+.nav-inner{
+width:90%;
+max-width:1200px;
+margin:auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 0;
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.brand img{
+height:38px;
+}
+
+.brand-name{
+font-family:'Cormorant Garamond', serif;
+font-size:1.8rem;
+color:var(--brown);
+}
+
+.nav-links a{
+margin-left:30px;
+text-decoration:none;
+font-size:0.9rem;
+letter-spacing:1px;
+color:var(--grey);
+}
+
+.nav-links a:hover{
+color:var(--brown);
+}
+
+/* HERO */
+
+.hero{
+height:100vh;
+display:flex;
+align-items:center;
+width:90%;
+max-width:1100px;
+margin:auto;
+}
+
+.hero h1{
+font-family:'Cormorant Garamond', serif;
+font-size:4rem;
+color:var(--brown);
+margin-bottom:20px;
+}
+
+.hero p{
+max-width:600px;
+line-height:1.8;
+color:var(--grey);
+}
+
+.footer{
+padding:80px 0;
+text-align:center;
+font-size:0.85rem;
+color:var(--lightgrey);
+border-top:1px solid #eeeeee;
+}
+
+@media(max-width:768px){
+.intro-word{font-size:2.2rem;}
+.hero h1{font-size:2.5rem;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="intro">
+<div id="introText" class="intro-word"></div>
+<img src="logo.png" id="introLogo" class="intro-logo">
+</div>
+
+<div class="site" id="mainSite">
+
+<nav>
+<div class="nav-inner">
+<div class="brand">
+<img src="logo.png">
+<div class="brand-name">The Samanweeave Project</div>
+</div>
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="works.html">Works</a>
+<a href="connect.html">Connect</a>
+</div>
+</div>
+</nav>
+
+<div class="hero">
+<div>
+<h1>People. Place. Purpose.</h1>
+<p>A harmonious weave between every parameter involved in curating a personalised spatial experience.</p>
+</div>
+</div>
+
+<div class="footer">
+© 2026 The Samanweeave Project
+</div>
+
+</div>
+
+<script>
+
+const words = ["People", "Place", "Purpose"];
+const text = document.getElementById("introText");
+const logo = document.getElementById("introLogo");
+const intro = document.querySelector(".intro");
+const site = document.getElementById("mainSite");
+
+let i = 0;
+
+function showWords(){
+if(i < words.length){
+text.textContent = words[i];
+text.style.opacity = 1;
+
+setTimeout(()=>{
+text.style.opacity = 0;
+i++;
+setTimeout(showWords,300);
+},900);
+
+}else{
+// show all words together quickly
+text.textContent = "People · Place · Purpose";
+text.style.opacity = 1;
+
+setTimeout(()=>{
+text.style.opacity = 0;
+setTimeout(()=>{
+logo.style.opacity = 1;
+
+setTimeout(()=>{
+logo.style.opacity = 0;
+intro.style.opacity = 0;
+
+setTimeout(()=>{
+intro.style.display="none";
+site.style.opacity=1;
+},800);
+
+},1200);
+
+},400);
+
+},1200);
+}
+}
+
+showWords();
+
+</script>
+
+</body>
+</html>
