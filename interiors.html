@@ -13,21 +13,24 @@ body{
 margin:0;
 background:#ffffff;
 font-family:'Inter', sans-serif;
+color:#666;
 }
 
+/* COLORS */
 :root{
 --brown:#4b2e1f;
---lightgrey:#888;
+--lightgrey:#9a9a9a;
 }
 
-/* NAV */
+/* NAVIGATION */
 
 nav{
 position:fixed;
 top:0;
 width:100%;
 background:#ffffff;
-border-bottom:1px solid #eee;
+border-bottom:1px solid #eeeeee;
+z-index:1000;
 }
 
 .nav-inner{
@@ -40,20 +43,52 @@ align-items:center;
 padding:20px 0;
 }
 
-.nav-inner a{
-text-decoration:none;
-color:#666;
-margin-left:25px;
-}
-
-.nav-inner a:hover{
-color:var(--brown);
-}
-
 .brand{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.brand img{
+height:36px;
+}
+
+.brand-name{
 font-family:'Cormorant Garamond', serif;
-color:var(--brown);
 font-size:1.6rem;
+color:var(--brown);
+}
+
+.nav-links a{
+margin-left:30px;
+text-decoration:none;
+font-size:0.9rem;
+color:#666;
+}
+
+.nav-links a:hover{
+color:var(--brown);
+}
+
+/* PAGE HEADER */
+
+.page-header{
+margin-top:140px;
+text-align:center;
+animation:fadeIn 1.2s ease forwards;
+opacity:0;
+}
+
+.page-header h1{
+font-family:'Cormorant Garamond', serif;
+font-size:3rem;
+color:var(--brown);
+margin-bottom:15px;
+}
+
+.page-header p{
+color:var(--lightgrey);
+font-size:1rem;
 }
 
 /* GRID */
@@ -61,7 +96,7 @@ font-size:1.6rem;
 .container{
 width:90%;
 max-width:1200px;
-margin:160px auto;
+margin:80px auto 120px auto;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
 gap:60px;
@@ -110,6 +145,10 @@ font-size:0.9rem;
 color:#ddd;
 }
 
+@keyframes fadeIn{
+to{opacity:1;}
+}
+
 </style>
 </head>
 
@@ -117,14 +156,22 @@ color:#ddd;
 
 <nav>
 <div class="nav-inner">
-<div class="brand">The Samanweeave Project</div>
-<div>
+<div class="brand">
+<img src="logo.png">
+<div class="brand-name">The Samanweeave Project</div>
+</div>
+<div class="nav-links">
 <a href="index.html">Home</a>
 <a href="works.html">Works</a>
 <a href="connect.html">Connect</a>
 </div>
 </div>
 </nav>
+
+<div class="page-header">
+<h1>Interior Projects</h1>
+<p>Material intelligence. Spatial emotion. Refined detailing.</p>
+</div>
 
 <div class="container">
 
