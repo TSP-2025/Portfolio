@@ -9,7 +9,7 @@
 
 <style>
 
-/* ================= GLOBAL ================= */
+/* GLOBAL */
 
 html, body{
 margin:0;
@@ -28,7 +28,7 @@ body{
 font-family:sans-serif;
 }
 
-/* ================= INTRO SCREEN ================= */
+/* INTRO */
 
 .intro{
 position:fixed;
@@ -59,14 +59,14 @@ opacity:0;
 transition:opacity 0.8s ease;
 }
 
-/* ================= MAIN SITE ================= */
+/* SITE */
 
 .site{
 opacity:0;
 transition:opacity 1s ease;
 }
 
-/* ================= NAVIGATION ================= */
+/* NAV */
 
 nav{
 position:fixed;
@@ -93,9 +93,7 @@ align-items:center;
 gap:12px;
 }
 
-.brand img{
-height:36px;
-}
+.brand img{height:36px;}
 
 .brand-name{
 font-family:'Cormorant Garamond', serif;
@@ -103,9 +101,7 @@ font-size:1.6rem;
 color:var(--brown);
 }
 
-.nav-links{
-display:flex;
-}
+.nav-links{display:flex;}
 
 .nav-links a{
 margin-left:30px;
@@ -115,49 +111,29 @@ color:var(--grey);
 transition:color 0.3s ease;
 }
 
-.nav-links a:hover{
-color:var(--brown);
-}
+.nav-links a:hover{color:var(--brown);}
 
-/* Mobile Toggle */
-
-.menu-toggle{
-display:none;
-font-size:1.5rem;
-cursor:pointer;
-}
+.menu-toggle{display:none;font-size:1.5rem;cursor:pointer;}
 
 @media(max-width:768px){
-
 .nav-links{
 position:absolute;
 top:70px;
 right:0;
 background:#ffffff;
 flex-direction:column;
-align-items:flex-start;
 width:200px;
 padding:20px;
 border-left:1px solid #eeeeee;
 border-bottom:1px solid #eeeeee;
 display:none;
 }
-
-.nav-links a{
-margin:10px 0;
+.nav-links a{margin:10px 0;}
+.nav-links.active{display:flex;}
+.menu-toggle{display:block;}
 }
 
-.nav-links.active{
-display:flex;
-}
-
-.menu-toggle{
-display:block;
-}
-
-}
-
-/* ================= HERO ================= */
+/* HERO */
 
 .hero{
 height:100vh;
@@ -166,6 +142,7 @@ align-items:center;
 width:90%;
 max-width:1100px;
 margin:auto;
+position:relative;
 }
 
 .hero h1{
@@ -186,7 +163,32 @@ font-size:1.2rem;
 letter-spacing:0.5px;
 }
 
-/* ================= FOOTER ================= */
+/* SUBTLE THREAD */
+
+.thread{
+position:absolute;
+top:50%;
+left:-10%;
+width:120%;
+height:200px;
+pointer-events:none;
+}
+
+.thread path{
+stroke:var(--brown);
+stroke-width:1;
+fill:none;
+stroke-dasharray:1000;
+stroke-dashoffset:1000;
+animation:draw 6s ease forwards infinite alternate;
+opacity:0.25;
+}
+
+@keyframes draw{
+to{stroke-dashoffset:0;}
+}
+
+/* FOOTER */
 
 .footer{
 padding:80px 0;
@@ -196,17 +198,10 @@ color:var(--lightgrey);
 border-top:1px solid #eeeeee;
 }
 
-@media(max-width:768px){
-.intro-word{font-size:2.2rem;}
-.hero h1{font-size:2.5rem;}
-}
-
 </style>
 </head>
 
 <body>
-
-<!-- INTRO -->
 
 <div class="intro" id="intro">
 <div class="intro-center">
@@ -215,34 +210,33 @@ border-top:1px solid #eeeeee;
 </div>
 </div>
 
-<!-- MAIN SITE -->
-
 <div class="site" id="site">
 
 <nav>
 <div class="nav-inner">
-
 <div class="brand">
 <img src="logo.png">
 <div class="brand-name">The Samanweeave Project</div>
 </div>
-
 <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
 <div class="nav-links" id="navLinks">
 <a href="index.html">Home</a>
 <a href="works.html">Works</a>
 <a href="connect.html">Connect</a>
 </div>
-
 </div>
 </nav>
 
 <div class="hero">
 <div>
 <h1>Weaving Spaces, Weaving Souls</h1>
-<p>Spaces aren't merely built, they are soulfully woven with intension and meaning. A harmonious weave between every parameter involved in curating a personalised spatial experience.</p>
+<p>Spaces aren't merely built, they are soulfully woven with intention and meaning. A harmonious weave between every parameter involved in curating a personalised spatial experience.</p>
 </div>
+
+<svg class="thread" viewBox="0 0 1200 200">
+<path d="M0 100 C300 0, 900 200, 1200 100"/>
+</svg>
+
 </div>
 
 <div class="footer">
@@ -253,62 +247,36 @@ border-top:1px solid #eeeeee;
 
 <script>
 
-/* ================= INTRO ANIMATION ================= */
+const words=["People","Place","Purpose"];
+const text=document.getElementById("introText");
+const logo=document.getElementById("introLogo");
+const intro=document.getElementById("intro");
+const site=document.getElementById("site");
 
-const words = ["People", "Place", "Purpose"];
-const text = document.getElementById("introText");
-const logo = document.getElementById("introLogo");
-const intro = document.getElementById("intro");
-const site = document.getElementById("site");
-
-let i = 0;
+let i=0;
 
 function runIntro(){
-
-if(i < words.length){
-
-text.textContent = words[i];
-text.style.opacity = 1;
-
-setTimeout(()=>{
-text.style.opacity = 0;
-i++;
-setTimeout(runIntro,250);
-},650);
-
+if(i<words.length){
+text.textContent=words[i];
+text.style.opacity=1;
+setTimeout(()=>{text.style.opacity=0;i++;setTimeout(runIntro,250);},650);
 }else{
-
-text.textContent = "People · Place · Purpose";
-text.style.opacity = 1;
-
+text.textContent="People · Place · Purpose";
+text.style.opacity=1;
 setTimeout(()=>{
-text.style.opacity = 0;
-
+text.style.opacity=0;
 setTimeout(()=>{
-logo.style.opacity = 1;
-
+logo.style.opacity=1;
 setTimeout(()=>{
-logo.style.opacity = 0;
-intro.style.opacity = 0;
-
-setTimeout(()=>{
-intro.style.display = "none";
-site.style.opacity = 1;
-},800);
-
+logo.style.opacity=0;
+intro.style.opacity=0;
+setTimeout(()=>{intro.style.display="none";site.style.opacity=1;},800);
 },1000);
-
 },400);
-
 },900);
-
 }
-
 }
-
 runIntro();
-
-/* ================= MOBILE MENU ================= */
 
 function toggleMenu(){
 document.getElementById("navLinks").classList.toggle("active");
