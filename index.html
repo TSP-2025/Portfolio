@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.5">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Samanweeave Project</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
@@ -18,52 +18,48 @@ overflow-x:hidden;
 }
 
 /* COLORS */
+
 :root{
 --brown:#4b2e1f;
 --grey:#666666;
 --lightgrey:#9a9a9a;
 }
 
-/* INTRO */
+/* ========================= */
+/* INTRO SCREEN */
+/* ========================= */
 
 .intro{
 position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100vh;
+inset:0;
 background:#ffffff;
-display:grid;
-place-items:center;   /* Perfect centering */
-z-index:2000;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
 }
 
-.intro-content{
+.intro-center{
 text-align:center;
-position:relative;
 }
 
 .intro-word{
 font-family:'Cormorant Garamond', serif;
-font-size:3.2rem;
+font-size:3.5rem;
 color:var(--brown);
 opacity:0;
-transition:opacity 0.6s ease;
+transition:opacity 0.5s ease;
 }
 
 .intro-logo{
-height:120px;
+height:140px;
 opacity:0;
-transition:opacity 0.8s ease, transform 2s ease;
-animation:pulse 2s infinite ease-in-out;
+transition:opacity 0.8s ease;
 }
 
-/* subtle loading pulse */
-@keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.03);}
-100%{transform:scale(1);}
-}
+/* ========================= */
+/* MAIN SITE */
+/* ========================= */
 
 .site{
 opacity:0;
@@ -73,11 +69,11 @@ transition:opacity 1s ease;
 /* NAV */
 
 nav{
-width:100%;
-border-bottom:1px solid #eeeeee;
-background:#ffffff;
 position:fixed;
 top:0;
+width:100%;
+background:#ffffff;
+border-bottom:1px solid #eeeeee;
 z-index:1000;
 }
 
@@ -94,16 +90,16 @@ padding:20px 0;
 .brand{
 display:flex;
 align-items:center;
-gap:15px;
+gap:12px;
 }
 
 .brand img{
-height:38px;
+height:36px;
 }
 
 .brand-name{
 font-family:'Cormorant Garamond', serif;
-font-size:1.8rem;
+font-size:1.6rem;
 color:var(--brown);
 }
 
@@ -111,7 +107,6 @@ color:var(--brown);
 margin-left:30px;
 text-decoration:none;
 font-size:0.9rem;
-letter-spacing:1px;
 color:var(--grey);
 }
 
@@ -143,6 +138,8 @@ line-height:1.8;
 color:var(--grey);
 }
 
+/* FOOTER */
+
 .footer{
 padding:80px 0;
 text-align:center;
@@ -150,6 +147,8 @@ font-size:0.85rem;
 color:var(--lightgrey);
 border-top:1px solid #eeeeee;
 }
+
+/* RESPONSIVE */
 
 @media(max-width:768px){
 .intro-word{font-size:2.2rem;}
@@ -161,14 +160,18 @@ border-top:1px solid #eeeeee;
 
 <body>
 
-<div class="intro">
-<div class="intro-content">
+<!-- INTRO -->
+
+<div class="intro" id="intro">
+<div class="intro-center">
 <div id="introText" class="intro-word"></div>
 <img src="logo.png" id="introLogo" class="intro-logo">
 </div>
 </div>
 
-<div class="site" id="mainSite">
+<!-- MAIN SITE -->
+
+<div class="site" id="site">
 
 <nav>
 <div class="nav-inner">
@@ -202,29 +205,33 @@ border-top:1px solid #eeeeee;
 const words = ["People", "Place", "Purpose"];
 const text = document.getElementById("introText");
 const logo = document.getElementById("introLogo");
-const intro = document.querySelector(".intro");
-const site = document.getElementById("mainSite");
+const intro = document.getElementById("intro");
+const site = document.getElementById("site");
 
 let i = 0;
 
-function showWords(){
+function runIntro(){
+
 if(i < words.length){
+
 text.textContent = words[i];
 text.style.opacity = 1;
 
 setTimeout(()=>{
 text.style.opacity = 0;
 i++;
-setTimeout(showWords,300);
-},900);
+setTimeout(runIntro,250);
+},700);
 
 }else{
-// show all words together quickly
+
+// Show all three together briefly
 text.textContent = "People · Place · Purpose";
 text.style.opacity = 1;
 
 setTimeout(()=>{
 text.style.opacity = 0;
+
 setTimeout(()=>{
 logo.style.opacity = 1;
 
@@ -233,19 +240,21 @@ logo.style.opacity = 0;
 intro.style.opacity = 0;
 
 setTimeout(()=>{
-intro.style.display="none";
-site.style.opacity=1;
+intro.style.display = "none";
+site.style.opacity = 1;
 },800);
 
-},1200);
+},1000);
 
 },400);
 
-},1200);
-}
+},1000);
+
 }
 
-showWords();
+}
+
+runIntro();
 
 </script>
 
