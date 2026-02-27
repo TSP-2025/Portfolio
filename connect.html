@@ -9,11 +9,14 @@
 
 <style>
 
-html,body{
+/* ================= GLOBAL ================= */
+
+html, body{
 margin:0;
 padding:0;
 background:#ffffff;
 font-family:sans-serif;
+overflow-x:hidden;
 }
 
 :root{
@@ -22,7 +25,7 @@ font-family:sans-serif;
 --lightgrey:#9a9a9a;
 }
 
-/* NAV */
+/* ================= NAVIGATION ================= */
 
 nav{
 position:fixed;
@@ -30,6 +33,7 @@ top:0;
 width:100%;
 background:#ffffff;
 border-bottom:1px solid #eeeeee;
+z-index:1000;
 }
 
 .nav-inner{
@@ -48,7 +52,9 @@ align-items:center;
 gap:12px;
 }
 
-.brand img{height:36px;}
+.brand img{
+height:36px;
+}
 
 .brand-name{
 font-family:'Cormorant Garamond', serif;
@@ -56,17 +62,67 @@ font-size:1.6rem;
 color:var(--brown);
 }
 
+/* Desktop Nav */
+
+.nav-links{
+display:flex;
+}
+
 .nav-links a{
 margin-left:30px;
 text-decoration:none;
 font-size:0.9rem;
 color:var(--grey);
+transition:color 0.3s ease;
 }
+
+.nav-links a:hover{
+color:var(--brown);
+}
+
+/* Mobile */
+
+.menu-toggle{
+display:none;
+font-size:1.5rem;
+cursor:pointer;
+}
+
+@media(max-width:768px){
+
+.nav-links{
+position:absolute;
+top:70px;
+right:0;
+background:#ffffff;
+flex-direction:column;
+width:220px;
+padding:20px;
+border-left:1px solid #eeeeee;
+border-bottom:1px solid #eeeeee;
+display:none;
+}
+
+.nav-links a{
+margin:10px 0;
+}
+
+.nav-links.active{
+display:flex;
+}
+
+.menu-toggle{
+display:block;
+}
+
+}
+
+/* ================= PAGE CONTENT ================= */
 
 .container{
 width:90%;
 max-width:600px;
-margin:180px auto;
+margin:180px auto 120px auto;
 }
 
 h1{
@@ -89,34 +145,81 @@ display:flex;
 flex-direction:column;
 }
 
-input,textarea{
-padding:12px;
+input, textarea{
+padding:14px;
 margin-bottom:20px;
 border:1px solid #dddddd;
 font-size:0.95rem;
+font-family:sans-serif;
 }
 
-textarea{resize:none;height:120px;}
+textarea{
+resize:none;
+height:130px;
+}
 
 button{
 background:var(--brown);
 color:#ffffff;
-padding:12px;
+padding:14px;
 border:none;
 cursor:pointer;
 transition:opacity 0.3s ease;
+font-size:0.95rem;
 }
 
-button:hover{opacity:0.85;}
+button:hover{
+opacity:0.85;
+}
+
+/* Honeypot */
 
 .hidden-field{
 display:none;
 }
 
-.success-message{
+/* Social */
+
+.social-links{
+margin-top:60px;
+display:flex;
+justify-content:center;
+gap:40px;
+}
+
+.social-links a{
+text-decoration:none;
+font-size:0.9rem;
+color:var(--grey);
+position:relative;
+transition:color 0.3s ease;
+}
+
+.social-links a::after{
+content:"";
+position:absolute;
+left:0;
+bottom:-4px;
+width:0%;
+height:1px;
+background:var(--brown);
+transition:width 0.4s ease;
+}
+
+.social-links a:hover{
 color:var(--brown);
-display:none;
-margin-top:20px;
+}
+
+.social-links a:hover::after{
+width:100%;
+}
+
+.footer{
+padding:80px 0;
+text-align:center;
+font-size:0.85rem;
+color:var(--lightgrey);
+border-top:1px solid #eeeeee;
 }
 
 </style>
@@ -126,15 +229,20 @@ margin-top:20px;
 
 <nav>
 <div class="nav-inner">
+
 <div class="brand">
 <img src="logo.png">
 <div class="brand-name">The Samanweeave Project</div>
 </div>
-<div class="nav-links">
+
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+<div class="nav-links" id="navLinks">
 <a href="index.html">Home</a>
 <a href="works.html">Works</a>
 <a href="connect.html">Connect</a>
 </div>
+
 </div>
 </nav>
 
@@ -143,46 +251,37 @@ margin-top:20px;
 <h1>Connect With Us</h1>
 <div class="tagline">Let us begin a conversation.</div>
 
-<form id="contactForm">
+<form action="https://formsubmit.co/thesamanweeaveproject@gmail.com" method="POST">
 
-<input type="text" name="name" placeholder="Your Name" required>
-<input type="email" name="email" placeholder="Your Email" required>
-<textarea name="message" placeholder="Your Message" required></textarea>
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_next" value="https://YOURUSERNAME.github.io/YOURREPO/connect.html">
 
 <!-- Honeypot -->
-<input type="text" name="company" class="hidden-field">
+<input type="text" name="_honey" class="hidden-field">
+
+<input type="text" name="Name" placeholder="Your Name" required>
+<input type="email" name="Email" placeholder="Your Email" required>
+<textarea name="Message" placeholder="Your Message" required></textarea>
 
 <button type="submit">Send Enquiry</button>
 
-<div class="success-message" id="successMessage">
-Thank you. We will respond shortly.
-</div>
-
 </form>
 
+<div class="contact-links">
+<a href="https://www.instagram.com/samanweeave.proj?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Instagram</a>
+<a href="https://www.linkedin.com/company/the-samanweeave-project/" target="_blank">LinkedIn</a>
+</div>
+
+</div>
+
+<div class="footer">
+© 2026 The Samanweeave Project
 </div>
 
 <script>
-
-const form=document.getElementById("contactForm");
-const success=document.getElementById("successMessage");
-const startTime=Date.now();
-
-form.addEventListener("submit",function(e){
-e.preventDefault();
-
-const honeypot=form.querySelector('input[name="company"]').value;
-const timeTaken=(Date.now()-startTime)/1000;
-
-if(honeypot!=""||timeTaken<3){
-alert("Spam detected.");
-return;
+function toggleMenu(){
+document.getElementById("navLinks").classList.toggle("active");
 }
-
-success.style.display="block";
-form.reset();
-});
-
 </script>
 
 </body>
