@@ -5,27 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Connect | The Samanweeave Project</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Roboto:ital,wght@1,100&display=swap" rel="stylesheet">
 
 <style>
 
-body{
+/* ================= GLOBAL ================= */
+
+html, body{
 margin:0;
+padding:0;
 background:#ffffff;
-font-family:'Inter', sans-serif;
-color:#666;
+overflow-x:hidden;
 }
 
 :root{
 --brown:#4b2e1f;
+--grey:#666666;
+--lightgrey:#9a9a9a;
 }
 
+body{
+font-family:sans-serif;
+}
+
+/* ================= NAVIGATION ================= */
+
 nav{
-width:100%;
-border-bottom:1px solid #eeeeee;
-background:#ffffff;
 position:fixed;
 top:0;
+width:100%;
+background:#ffffff;
+border-bottom:1px solid #eeeeee;
+z-index:1000;
 }
 
 .nav-inner{
@@ -41,51 +52,162 @@ padding:20px 0;
 .brand{
 display:flex;
 align-items:center;
-gap:15px;
+gap:12px;
 }
 
-.brand img{height:38px;}
+.brand img{
+height:36px;
+}
 
 .brand-name{
 font-family:'Cormorant Garamond', serif;
-font-size:1.8rem;
+font-size:1.6rem;
 color:var(--brown);
+}
+
+.nav-links{
+display:flex;
 }
 
 .nav-links a{
 margin-left:30px;
 text-decoration:none;
-color:#666;
 font-size:0.9rem;
+color:var(--grey);
+transition:color 0.3s ease;
 }
 
 .nav-links a:hover{
 color:var(--brown);
 }
 
+/* Mobile Toggle */
+
+.menu-toggle{
+display:none;
+font-size:1.5rem;
+cursor:pointer;
+}
+
+@media(max-width:768px){
+
+.nav-links{
+position:absolute;
+top:70px;
+right:0;
+background:#ffffff;
+flex-direction:column;
+align-items:flex-start;
+width:200px;
+padding:20px;
+border-left:1px solid #eeeeee;
+border-bottom:1px solid #eeeeee;
+display:none;
+}
+
+.nav-links a{
+margin:10px 0;
+}
+
+.nav-links.active{
+display:flex;
+}
+
+.menu-toggle{
+display:block;
+}
+
+}
+
+/* ================= PAGE CONTENT ================= */
+
 .container{
 width:90%;
 max-width:900px;
-margin:200px auto;
+margin:200px auto 120px auto;
+text-align:center;
 }
 
 h1{
 font-family:'Cormorant Garamond', serif;
-color:var(--brown);
 font-size:3rem;
-margin-bottom:50px;
-}
-
-a.contact-link{
-display:block;
-margin-bottom:25px;
-text-decoration:none;
-font-size:1rem;
-color:#666;
-}
-
-a.contact-link:hover{
 color:var(--brown);
+margin-bottom:25px;
+}
+
+.tagline{
+font-family:'Roboto', sans-serif;
+font-weight:100;
+font-style:italic;
+color:var(--grey);
+margin-bottom:70px;
+}
+
+/* ================= WEAVE DOT ANIMATION ================= */
+
+.weave-line{
+display:flex;
+justify-content:center;
+gap:14px;
+margin-bottom:80px;
+}
+
+.weave-line span{
+width:6px;
+height:6px;
+background:var(--brown);
+border-radius:50%;
+animation:wave 3s infinite ease-in-out;
+}
+
+/* staggered motion */
+
+.weave-line span:nth-child(2){animation-delay:0.2s;}
+.weave-line span:nth-child(3){animation-delay:0.4s;}
+.weave-line span:nth-child(4){animation-delay:0.6s;}
+.weave-line span:nth-child(5){animation-delay:0.8s;}
+.weave-line span:nth-child(6){animation-delay:1s;}
+.weave-line span:nth-child(7){animation-delay:1.2s;}
+.weave-line span:nth-child(8){animation-delay:1.4s;}
+.weave-line span:nth-child(9){animation-delay:1.6s;}
+.weave-line span:nth-child(10){animation-delay:1.8s;}
+.weave-line span:nth-child(11){animation-delay:2s;}
+.weave-line span:nth-child(12){animation-delay:2.2s;}
+
+@keyframes wave{
+0%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+100%{transform:translateY(0);}
+}
+
+/* ================= CONTACT LINKS ================= */
+
+.contact-links{
+margin-top:20px;
+}
+
+.contact-links a{
+display:block;
+text-decoration:none;
+font-size:1.1rem;
+color:var(--grey);
+margin-bottom:25px;
+transition:all 0.3s ease;
+}
+
+.contact-links a:hover{
+color:var(--brown);
+transform:translateX(8px);
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+padding:80px 0;
+text-align:center;
+font-size:0.85rem;
+color:var(--lightgrey);
+border-top:1px solid #eeeeee;
 }
 
 </style>
@@ -95,26 +217,56 @@ color:var(--brown);
 
 <nav>
 <div class="nav-inner">
+
 <div class="brand">
 <img src="logo.png">
 <div class="brand-name">The Samanweeave Project</div>
 </div>
-<div class="nav-links">
+
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+<div class="nav-links" id="navLinks">
 <a href="index.html">Home</a>
 <a href="works.html">Works</a>
 <a href="connect.html">Connect</a>
 </div>
+
 </div>
 </nav>
 
 <div class="container">
+
 <h1>Connect With Us</h1>
 
-<a class="contact-link" href="mailto:thesamanweeaveproject@gmail.com">Email Us</a>
-<a class="contact-link" href="https://www.instagram.com/samanweeave.proj?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Instagram</a>
-<a class="contact-link" href="https://www.linkedin.com/in/YOURPROFILE" target="_blank">LinkedIn</a>
+<div class="tagline">
+Let us begin a conversation.
+</div>
+
+<!-- Animated Dot Weave -->
+
+<div class="weave-line">
+<span></span><span></span><span></span><span></span><span></span>
+<span></span><span></span><span></span><span></span><span></span>
+<span></span><span></span>
+</div>
+
+<div class="contact-links">
+<a href="mailto:thesamanweeaveproject@gmail.com">Email Us</a>
+<a href="https://www.instagram.com/YOURHANDLE" target="_blank">Instagram</a>
+<a href="https://www.linkedin.com/in/YOURPROFILE" target="_blank">LinkedIn</a>
+</div>
 
 </div>
+
+<div class="footer">
+© 2026 The Samanweeave Project
+</div>
+
+<script>
+function toggleMenu(){
+document.getElementById("navLinks").classList.toggle("active");
+}
+</script>
 
 </body>
 </html>
