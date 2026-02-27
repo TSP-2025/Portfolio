@@ -9,8 +9,6 @@
 
 <style>
 
-/* ================= GLOBAL ================= */
-
 html, body{
 margin:0;
 padding:0;
@@ -25,7 +23,7 @@ overflow-x:hidden;
 --lightgrey:#9a9a9a;
 }
 
-/* ================= NAVIGATION ================= */
+/* ================= NAV ================= */
 
 nav{
 position:fixed;
@@ -52,9 +50,7 @@ align-items:center;
 gap:12px;
 }
 
-.brand img{
-height:36px;
-}
+.brand img{height:36px;}
 
 .brand-name{
 font-family:'Cormorant Garamond', serif;
@@ -62,34 +58,18 @@ font-size:1.6rem;
 color:var(--brown);
 }
 
-/* Desktop Nav */
-
-.nav-links{
-display:flex;
-}
+.nav-links{display:flex;}
 
 .nav-links a{
 margin-left:30px;
 text-decoration:none;
 font-size:0.9rem;
 color:var(--grey);
-transition:color 0.3s ease;
 }
 
-.nav-links a:hover{
-color:var(--brown);
-}
-
-/* Mobile */
-
-.menu-toggle{
-display:none;
-font-size:1.5rem;
-cursor:pointer;
-}
+.menu-toggle{display:none;font-size:1.5rem;cursor:pointer;}
 
 @media(max-width:768px){
-
 .nav-links{
 position:absolute;
 top:70px;
@@ -102,27 +82,18 @@ border-left:1px solid #eeeeee;
 border-bottom:1px solid #eeeeee;
 display:none;
 }
-
-.nav-links a{
-margin:10px 0;
+.nav-links a{margin:10px 0;}
+.nav-links.active{display:flex;}
+.menu-toggle{display:block;}
 }
 
-.nav-links.active{
-display:flex;
-}
-
-.menu-toggle{
-display:block;
-}
-
-}
-
-/* ================= PAGE CONTENT ================= */
+/* ================= CONTENT ================= */
 
 .container{
 width:90%;
 max-width:600px;
 margin:180px auto 120px auto;
+text-align:center;
 }
 
 h1{
@@ -137,12 +108,50 @@ font-family:'Roboto', sans-serif;
 font-weight:100;
 font-style:italic;
 color:var(--grey);
-margin-bottom:50px;
+margin-bottom:40px;
 }
+
+/* ================= DOT WEAVE ================= */
+
+.weave-line{
+display:flex;
+justify-content:center;
+gap:14px;
+margin-bottom:60px;
+}
+
+.weave-line span{
+width:6px;
+height:6px;
+background:var(--brown);
+border-radius:50%;
+animation:wave 3s infinite ease-in-out;
+}
+
+.weave-line span:nth-child(2){animation-delay:0.2s;}
+.weave-line span:nth-child(3){animation-delay:0.4s;}
+.weave-line span:nth-child(4){animation-delay:0.6s;}
+.weave-line span:nth-child(5){animation-delay:0.8s;}
+.weave-line span:nth-child(6){animation-delay:1s;}
+.weave-line span:nth-child(7){animation-delay:1.2s;}
+.weave-line span:nth-child(8){animation-delay:1.4s;}
+.weave-line span:nth-child(9){animation-delay:1.6s;}
+.weave-line span:nth-child(10){animation-delay:1.8s;}
+.weave-line span:nth-child(11){animation-delay:2s;}
+.weave-line span:nth-child(12){animation-delay:2.2s;}
+
+@keyframes wave{
+0%{transform:translateY(0);}
+50%{transform:translateY(-8px);}
+100%{transform:translateY(0);}
+}
+
+/* ================= FORM ================= */
 
 form{
 display:flex;
 flex-direction:column;
+text-align:left;
 }
 
 input, textarea{
@@ -150,7 +159,6 @@ padding:14px;
 margin-bottom:20px;
 border:1px solid #dddddd;
 font-size:0.95rem;
-font-family:sans-serif;
 }
 
 textarea{
@@ -165,31 +173,36 @@ padding:14px;
 border:none;
 cursor:pointer;
 transition:opacity 0.3s ease;
-font-size:0.95rem;
 }
 
-button:hover{
-opacity:0.85;
+button:hover{opacity:0.85;}
+
+.hidden-field{display:none;}
+
+/* ================= SOCIAL ================= */
+
+.social-section{
+margin-top:70px;
+border-top:1px solid #eeeeee;
+padding-top:40px;
 }
 
-/* Honeypot */
-
-.hidden-field{
-display:none;
+.social-title{
+font-family:'Cormorant Garamond', serif;
+font-size:1.4rem;
+color:var(--brown);
+margin-bottom:25px;
 }
-
-/* Social */
 
 .social-links{
-margin-top:60px;
 display:flex;
 justify-content:center;
-gap:40px;
+gap:50px;
 }
 
 .social-links a{
 text-decoration:none;
-font-size:0.9rem;
+font-size:1rem;
 color:var(--grey);
 position:relative;
 transition:color 0.3s ease;
@@ -220,6 +233,7 @@ text-align:center;
 font-size:0.85rem;
 color:var(--lightgrey);
 border-top:1px solid #eeeeee;
+margin-top:80px;
 }
 
 </style>
@@ -251,12 +265,16 @@ border-top:1px solid #eeeeee;
 <h1>Connect With Us</h1>
 <div class="tagline">Let us begin a conversation.</div>
 
+<div class="weave-line">
+<span></span><span></span><span></span><span></span><span></span>
+<span></span><span></span><span></span><span></span><span></span>
+<span></span><span></span>
+</div>
+
 <form action="https://formsubmit.co/thesamanweeaveproject@gmail.com" method="POST">
 
 <input type="hidden" name="_captcha" value="false">
 <input type="hidden" name="_next" value="https://YOURUSERNAME.github.io/YOURREPO/connect.html">
-
-<!-- Honeypot -->
 <input type="text" name="_honey" class="hidden-field">
 
 <input type="text" name="Name" placeholder="Your Name" required>
@@ -267,9 +285,12 @@ border-top:1px solid #eeeeee;
 
 </form>
 
-<div class="contact-links">
-<a href="https://www.instagram.com/samanweeave.proj?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Instagram</a>
-<a href="https://www.linkedin.com/company/the-samanweeave-project/" target="_blank">LinkedIn</a>
+<div class="social-section">
+<div class="social-title">Follow Us</div>
+<div class="social-links">
+<a href="https://www.instagram.com/YOURHANDLE/" target="_blank">Instagram</a>
+<a href="https://www.linkedin.com/in/YOURPROFILE/" target="_blank">LinkedIn</a>
+</div>
 </div>
 
 </div>
